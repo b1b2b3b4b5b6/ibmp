@@ -11,7 +11,15 @@ import (
 	"time"
 )
 
+var tcpPortCfg struct{
+	TcpRecvPort int
+}
+
 func init() {
+	json, err := cfg.TakeJson("MeshIfs")
+	errtool.Errpanic(err)
+	err = jsontool.Decode(json, &tcpPortCfg)
+	errtool.Errpanic(err)
 	go tcpRecv()
 }
 
@@ -116,13 +124,12 @@ func tcpHandle(conn *net.TCPConn) {
 }
 
 func tcpRecv() {
-	port, err := cfg.TakeInt("TcpRecvPort")
-	errtool.Errpanic(err)
-	localAddress, err := net.ResolveTCPAddr("tcp4", fmt.Sprintf(":%d", port))
+
+	localAddress, err := net.ResolveTCPAddr("tcp4", fmt.Sprintf(":%d", tcpPortCfg.TcpRecvPort))
 	errtool.Errpanic(err)
 	tcpListener, err := net.ListenTCP("tcp", localAddress)
 	errtool.Errpanic(err)
-	log.Info("tcp recv run in port[%d]", port)
+	log.Info("tcp recv run in port[%d]", tcpPortCfg.TcpRecvPort)
 	defer func() {
 		tcpListener.Close()
 	}()

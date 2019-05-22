@@ -19,7 +19,18 @@ type Udpifs struct {
 	IP     string
 }
 
+var udpPortCfg struct{
+	UdpFindPort int
+	UdpRecvPort int
+	UdpSendPort int
+}
+
 func init() {
+	json, err := cfg.TakeJson("MeshIfs")
+	errtool.Errpanic(err)
+	err = jsontool.Decode(json, &udpPortCfg)
+	errtool.Errpanic(err)
+
 	go recvServer()
 	go udpServer()
 }
@@ -52,9 +63,7 @@ func addShell(data []byte) []byte {
 
 func (p *Udpifs) Send(data []byte) error {
 	data = addShell(data)
-	port, err := cfg.TakeInt("UdpSendPort")
-	errtool.Errpanic(err)
-	dstAddr := &net.UDPAddr{IP: net.ParseIP(p.IP), Port: port}
+	dstAddr := &net.UDPAddr{IP: net.ParseIP(p.IP), Port: udpPortCfg.UdpSendPort}
 	conn, err := net.DialUDP("udp", nil, dstAddr)
 	errtool.Errpanic(err)
 	defer conn.Close()
@@ -88,14 +97,12 @@ func (p *Udpifs) Send(data []byte) error {
 }
 
 func recvServer() {
-	recv_port, err := cfg.TakeInt("UdpRecvPort")
-	errtool.Errpanic(err)
-	addr, err := net.ResolveUDPAddr("udp", fmt.Sprintf(":%d", recv_port))
+	addr, err := net.ResolveUDPAddr("udp", fmt.Sprintf(":%d", udpPortCfg.UdpRecvPort))
 	errtool.Errpanic(err)
 
 	conn, err := net.ListenUDP("udp", addr)
 	errtool.Errpanic(err)
-	log.Info("udp recv run in port[%d]", recv_port)
+	log.Info("udp recv run in port[%d]", udpPortCfg.UdpRecvPort)
 
 	for {
 		data := make([]byte, MaxifsLen)
@@ -124,9 +131,7 @@ func recvServer() {
 }
 
 func udpServer() {
-	udp_port, err := cfg.TakeInt("UdpFindPort")
-	errtool.Errpanic(err)
-	addr, err := net.ResolveUDPAddr("udp", fmt.Sprintf(":%d", udp_port))
+	addr, err := net.ResolveUDPAddr("udp", fmt.Sprintf(":%d", udpPortCfg.UdpFindPort))
 	errtool.Errpanic(err)
 
 	conn, err := net.ListenUDP("udp", addr)

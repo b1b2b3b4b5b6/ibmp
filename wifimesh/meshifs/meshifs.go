@@ -15,6 +15,7 @@ import (
 var log = logface.New(logface.InfoLevel)
 var cfg = cfgtool.New("conf.json")
 
+
 type RecvRaw struct {
 	MeshID string
 	Typ    uint8

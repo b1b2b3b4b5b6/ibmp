@@ -7,13 +7,13 @@
         "LocalPort":4498
     },
 
-    "UdpFindPort": 4799,
-    "UdpRecvPort": 4800,
-    "UdpSendPort":4801,
+    "MeshIfs":{
+        "UdpFindPort": 4799,
+        "UdpRecvPort": 4800,
+        "UdpSendPort":4801,
+        "TcpRecvPort":4802
+    },
 
-    "TcpRecvPort":4802,
-    
-    
     "ServerMethod": "MQTT",
     "MQTTSendCfg":{
         "Topic":"/sirui/iot/define/4/*/response/json",
