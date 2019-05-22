@@ -29,9 +29,9 @@ func init() {
 	json, err := cfg.TakeJson("MeshIfs")
 	errtool.Errpanic(err)
 	err = jsontool.Decode(json, &udpPortCfg)
-	errtool.Errpanic(err)
+	errtool.Errpanic(err) 
 
-	go recvServer()
+	go recvServer()   
 	go udpServer()
 }
 
