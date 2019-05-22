@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/lumosin/goc/logface"
 	"github.com/lumosin/goc/tl/cfgt"
-	_ "goc/toolcom/debtool"
+	_ "github.com/lumosin/goc/tl/debt"
 	_ "ibmp/bacnet"
 	_ "ibmp/mcb"
 	"ibmp/mcb/server"
