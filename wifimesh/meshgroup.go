@@ -1,8 +1,8 @@
 package wifimesh
 
 import (
-	"goc/logface"
-	"goc/toolcom/cfgtool"
+	"github.com/lumosin/goc/logface"
+	"github.com/lumosin/goc/tl/cfgt"
 	"ibmp/wifimesh/meshifs"
 )
 

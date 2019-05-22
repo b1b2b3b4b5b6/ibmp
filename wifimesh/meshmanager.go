@@ -1,9 +1,9 @@
 package wifimesh
 
 import (
-	"goc/toolcom/converttool"
-	"goc/toolcom/errtool"
-	"goc/toolcom/jsontool"
+	github.com/lumosin/goc/tl/turnt"
+	"github.com/lumosin/goc/tl/errt"
+	"github.com/lumosin/goc/tl/jsont"
 	"ibmp/wifimesh/meshifs"
 	"io/ioutil"
 )

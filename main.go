@@ -1,8 +1,8 @@
 package main
 
 import (
-	"goc/logface"
-	"goc/toolcom/cfgtool"
+	"github.com/lumosin/goc/logface"
+	"github.com/lumosin/goc/tl/cfgt"
 	_ "goc/toolcom/debtool"
 	_ "ibmp/bacnet"
 	_ "ibmp/mcb"

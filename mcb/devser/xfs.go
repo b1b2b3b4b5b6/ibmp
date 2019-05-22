@@ -1,8 +1,8 @@
 package devser
 
 import (
-	"goc/toolcom/errtool"
-	"goc/toolcom/jsontool"
+	"github.com/lumosin/goc/tl/errt"
+	"github.com/lumosin/goc/tl/jsont"
 )
 
 type XfsDev struct {

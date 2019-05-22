@@ -3,9 +3,9 @@ package wifimesh
 import (
 	"fmt"
 	"goc/toolcom/debtool"
-	"goc/toolcom/errtool"
+	"github.com/lumosin/goc/tl/errt"
 	"goc/toolcom/iotool"
-	"goc/toolcom/jsontool"
+	"github.com/lumosin/goc/tl/jsont"
 	"io"
 	"net/http"
 	"os"

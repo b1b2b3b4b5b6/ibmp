@@ -8,8 +8,8 @@ recv&send test: pass
 */
 
 import (
-	"goc/logface"
-	"goc/toolcom/cfgtool"
+	"github.com/lumosin/goc/logface"
+	"github.com/lumosin/goc/tl/cfgt"
 )
 
 var log = logface.New(logface.InfoLevel)

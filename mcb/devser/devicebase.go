@@ -1,7 +1,7 @@
 package devser
 
 import (
-	"goc/logface"
+	"github.com/lumosin/goc/logface"
 	"goc/toolcom/debtool"
 )
 

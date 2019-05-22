@@ -2,9 +2,9 @@ package server
 
 import (
 	"fmt"
-	"goc/toolcom/cfgtool"
-	"goc/toolcom/errtool"
-	"goc/toolcom/jsontool"
+	"github.com/lumosin/goc/tl/cfgt"
+	"github.com/lumosin/goc/tl/errt"
+	"github.com/lumosin/goc/tl/jsont"
 	"math/rand"
 	"net/http"
 	"time"

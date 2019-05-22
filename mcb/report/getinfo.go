@@ -1,7 +1,7 @@
 package report
 
 import (
-	"goc/toolcom/jsontool"
+	"github.com/lumosin/goc/tl/jsont"
 	"ibmp/mcb/devser"
 	"ibmp/wifimesh"
 	"time"

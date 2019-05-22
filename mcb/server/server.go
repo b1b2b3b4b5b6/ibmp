@@ -2,9 +2,9 @@ package server
 
 import (
 	"fmt"
-	"goc/logface"
-	"goc/toolcom/cfgtool"
-	"goc/toolcom/errtool"
+	"github.com/lumosin/goc/logface"
+	"github.com/lumosin/goc/tl/cfgt"
+	"github.com/lumosin/goc/tl/errt"
 )
 
 const (

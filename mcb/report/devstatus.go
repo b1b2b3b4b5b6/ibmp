@@ -1,7 +1,7 @@
 package report
 
 import (
-	"goc/toolcom/errtool"
+	"github.com/lumosin/goc/tl/errt"
 	"ibmp/mcb/devser"
 	"ibmp/wifimesh"
 	"time"

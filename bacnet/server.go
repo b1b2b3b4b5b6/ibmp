@@ -2,10 +2,10 @@ package bacnet
 
 import (
 	"fmt"
-	"goc/logface"
-	"goc/toolcom/cfgtool"
-	"goc/toolcom/errtool"
-	"goc/toolcom/jsontool"
+	"github.com/lumosin/goc/logface"
+	"github.com/lumosin/goc/tl/cfgt"
+	"github.com/lumosin/goc/tl/errt"
+	"github.com/lumosin/goc/tl/jsont"
 	"ibmp/mcb/devser"
 
 	"net/http"
