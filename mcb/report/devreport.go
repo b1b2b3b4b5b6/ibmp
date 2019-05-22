@@ -9,7 +9,7 @@ import (
 )
 
 var log = logface.New(logface.InfoLevel)
-var cfg = cfgtool.New("conf.json")
+var cfg = cfgt.New("conf.json")
 
 func init() {
 	go monitorLoop()

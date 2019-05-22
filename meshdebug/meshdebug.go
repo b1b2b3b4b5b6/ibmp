@@ -28,9 +28,9 @@ type requestArg struct {
 
 func init() {
 	http.HandleFunc("/debug/mesh", debugMesh)
-	cfg := cfgtool.New("conf.json")
+	cfg := cfgt.New("conf.json")
 	port, err := cfg.TakeInt("MeshDebugPort")
-	errtool.Errpanic(err)
+	errt.Errpanic(err)
 	go http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
 	log.Info("mesh debug work on port[%d]", port)
 }
@@ -39,11 +39,11 @@ func debugMesh(w http.ResponseWriter, r *http.Request) {
 	res := response{}
 	defer func() {
 		w.Header().Add("Content-Type", "application/json")
-		w.Write([]byte(jsontool.Encode(&res)))
+		w.Write([]byte(jsont.Encode(&res)))
 	}()
 
 	err := r.ParseForm()
-	errtool.Errpanic(err)
+	errt.Errpanic(err)
 	var request requestArg
 	err = json.NewDecoder(r.Body).Decode(&request)
 

@@ -20,7 +20,7 @@ func getInfoLoop() {
 					Cmd string
 				}
 				cusData.Cmd = "Brust"
-				wifimesh.GetGroup().Send([]string{v.GetComData().Mac}, jsontool.Encode(&cusData))
+				wifimesh.GetGroup().Send([]string{v.GetComData().Mac}, jsont.Encode(&cusData))
 				time.Sleep(time.Second * 1)
 				continue
 			}

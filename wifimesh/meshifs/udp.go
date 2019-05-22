@@ -27,9 +27,9 @@ var udpPortCfg struct{
 
 func init() {
 	json, err := cfg.TakeJson("MeshIfs")
-	errtool.Errpanic(err)
-	err = jsontool.Decode(json, &udpPortCfg)
-	errtool.Errpanic(err) 
+	errt.Errpanic(err)
+	err = jsont.Decode(json, &udpPortCfg)
+	errt.Errpanic(err) 
 
 	go recvServer()   
 	go udpServer()
@@ -65,7 +65,7 @@ func (p *Udpifs) Send(data []byte) error {
 	data = addShell(data)
 	dstAddr := &net.UDPAddr{IP: net.ParseIP(p.IP), Port: udpPortCfg.UdpSendPort}
 	conn, err := net.DialUDP("udp", nil, dstAddr)
-	errtool.Errpanic(err)
+	errt.Errpanic(err)
 	defer conn.Close()
 
 	for n := 0; n < 3; n++ {
@@ -98,10 +98,10 @@ func (p *Udpifs) Send(data []byte) error {
 
 func recvServer() {
 	addr, err := net.ResolveUDPAddr("udp", fmt.Sprintf(":%d", udpPortCfg.UdpRecvPort))
-	errtool.Errpanic(err)
+	errt.Errpanic(err)
 
 	conn, err := net.ListenUDP("udp", addr)
-	errtool.Errpanic(err)
+	errt.Errpanic(err)
 	log.Info("udp recv run in port[%d]", udpPortCfg.UdpRecvPort)
 
 	for {
@@ -116,7 +116,7 @@ func recvServer() {
 		go func() {
 			conn.WriteToUDP([]byte("yes, i received"), remoteAddr)
 			m := &RecvRaw{}
-			m.MeshID = converttool.Mac2Str(data[:6])
+			m.MeshID = turnt.Mac2Str(data[:6])
 			m.Typ = data[6]
 			m.Data = data[7:]
 			log.Debug("recv data: mesh_id[%s] typ[%d] len[%d]", m.MeshID, m.Typ, len(m.Data))
@@ -132,22 +132,22 @@ func recvServer() {
 
 func udpServer() {
 	addr, err := net.ResolveUDPAddr("udp", fmt.Sprintf(":%d", udpPortCfg.UdpFindPort))
-	errtool.Errpanic(err)
+	errt.Errpanic(err)
 
 	conn, err := net.ListenUDP("udp", addr)
-	errtool.Errpanic(err)
+	errt.Errpanic(err)
 
 	data := make([]byte, MaxifsLen)
 	for {
 		len, remoteAddr, err := conn.ReadFromUDP(data)
-		errtool.Errpanic(err)
+		errt.Errpanic(err)
 		go func() {
 			data = data[:len]
 			conn.WriteToUDP([]byte("yes, i received"), remoteAddr)
 			var m struct {
 				MeshID string
 			}
-			jsontool.Decode(string(data), &m)
+			jsont.Decode(string(data), &m)
 
 			mc := Udpifs{}
 			mc.IP = remoteAddr.IP.String()

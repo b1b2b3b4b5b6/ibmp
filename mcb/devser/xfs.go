@@ -25,14 +25,14 @@ func (p *XfsDev) ReplyCmd(cmd string) (replyDev string, replySer string) {
 		Typ string
 		Mac string
 	}
-	err := jsontool.Decode(cmd, &device)
-	errtool.Errpanic(err)
+	err := jsont.Decode(cmd, &device)
+	errt.Errpanic(err)
 
 	var cusData struct {
 		Cmd string
 	}
 
-	return jsontool.Encode(cusData), ""
+	return jsont.Encode(cusData), ""
 }
 
 func (p *XfsDev) ReplyFeed(feed interface{}) (replyDev string, replySer string) {
@@ -46,7 +46,7 @@ func (p *XfsDev) ReplyFeed(feed interface{}) (replyDev string, replySer string) 
 			Version string
 			IP      string
 		}
-		jsontool.Decode(str, &m)
+		jsont.Decode(str, &m)
 		p.Status.Init = true
 		p.ComData.Ver = m.Version
 		p.IP = m.IP
@@ -89,6 +89,6 @@ func (p *XfsDev) GetJson() string {
 		m.Device.Status = "offline"
 	}
 
-	str := jsontool.Encode(&m)
+	str := jsont.Encode(&m)
 	return str
 }

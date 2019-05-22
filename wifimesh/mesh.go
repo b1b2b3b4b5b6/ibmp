@@ -49,7 +49,7 @@ func (p *mesh) Ota(macs []string, typ string, peroidMs int, isHttp int) {
 	}
 	m.PeroidMs = peroidMs
 	m.IsHttp = isHttp
-	p.chSend <- createStrW("Ota", macs, string(jsontool.Encode(m)))
+	p.chSend <- createStrW("Ota", macs, string(jsont.Encode(m)))
 	log.Debug("Ota[%s][%d] macs: %+v", typ, peroidMs, macs)
 }
 
@@ -57,7 +57,7 @@ func (p *mesh) Add(macs []string, targeMac string) {
 	var m struct {
 		Mac string
 	}
-	p.chSend <- createStrW("Add", macs, string(jsontool.Encode(m)))
+	p.chSend <- createStrW("Add", macs, string(jsont.Encode(m)))
 	log.Debug("Add macs: %+v", macs)
 }
 
@@ -75,7 +75,7 @@ func (p *mesh) ChangeConfig(macs []string, MESHID string, SSID string, PASSWD st
 	m.SSID = SSID
 	m.PASSWD = PASSWD
 	m.MESHID = MESHID
-	p.chSend <- createStrW("ChangeConfig", macs, string(jsontool.Encode(m)))
+	p.chSend <- createStrW("ChangeConfig", macs, string(jsont.Encode(m)))
 	log.Debug("ChangeConfig[SSID: %s, PASSWS: %s MeshID: %s] macs: %+v", SSID, PASSWD, MESHID, macs)
 }
 
@@ -121,7 +121,7 @@ func createStrW(typ string, macs []string, cusDateW interface{}) []byte {
 	data.CusData = cusDateW
 	jsonByte, err := json.Marshal(data)
 	jsonByte = append(jsonByte, 0) // add 0 to the tail of string
-	errtool.Errpanic(err)
+	errt.Errpanic(err)
 
 	strByte := append([]byte{0, 0, 0, 0, 0, 0, sendStr}, jsonByte...)
 	lenByte := make([]byte, 2)

@@ -19,13 +19,13 @@ var chHttpRecv = make(chan string, 1000)
 
 func NewHttp() *httpHandle {
 	rand.Seed(time.Now().Unix())
-	cfg := cfgtool.New("conf.json")
+	cfg := cfgt.New("conf.json")
 
 	sendJson, err := cfg.TakeJson("HttpCfg")
-	errtool.Errpanic(err)
+	errt.Errpanic(err)
 
 	m := httpHandle{}
-	jsontool.Decode(sendJson, &m)
+	jsont.Decode(sendJson, &m)
 	log.Info("http server init success")
 	return &m
 }
@@ -65,7 +65,7 @@ func localHandle(w http.ResponseWriter, r *http.Request) {
 		Result     interface{} `json:"Result,omitempty"`
 	}
 	defer func() {
-		w.Write([]byte(jsontool.Encode(&res)))
+		w.Write([]byte(jsont.Encode(&res)))
 	}()
 
 	err := r.ParseForm()

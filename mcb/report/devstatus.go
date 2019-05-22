@@ -46,7 +46,7 @@ func onlineSetLoop() {
 func onlineUnsetLoop() {
 	hbTimeS, err := cfg.TakeInt("HBTimeS")
 	log.Info("set device HB time [%d]s", hbTimeS)
-	errtool.Errpanic(err)
+	errt.Errpanic(err)
 	for {
 		for _, v := range devser.DeviceMap {
 			timeMinus := time.Now().Unix() - v.GetStatus().TimeStamp

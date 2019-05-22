@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/lumosin/goc/tl/turnt"
-	"github.com/lumosin/tl/errt"
+	"github.com/lumosin/goc/tl/errt"
 	"github.com/lumosin/goc/tl/jsont"
 	"net"
 	"time"
@@ -17,9 +17,9 @@ var tcpPortCfg struct{
 
 func init() {
 	json, err := cfg.TakeJson("MeshIfs")
-	errtool.Errpanic(err)
-	err = jsontool.Decode(json, &tcpPortCfg)
-	errtool.Errpanic(err)
+	errt.Errpanic(err)
+	err = jsont.Decode(json, &tcpPortCfg)
+	errt.Errpanic(err)
 	go tcpRecv()
 }
 
@@ -57,7 +57,7 @@ func (p *Tcpifs) Send(data []byte) error {
 		return err
 	}
 
-	errtool.Assert(send_len == len(data))
+	errt.Assert(send_len == len(data))
 	time.Sleep(time.Millisecond * 100)
 	return nil
 }
@@ -87,7 +87,7 @@ func pakcetSplit(data []byte) {
 			break
 		}
 
-		m.MeshID = converttool.Mac2Str(data[:6])
+		m.MeshID = turnt.Mac2Str(data[:6])
 		m.Typ = data[6]
 		m.Data = data[7:data_len]
 		log.Debug("recv data: mesh_id[%s] typ[%d] len[%d]", m.MeshID, m.Typ, len(m.Data))
@@ -126,9 +126,9 @@ func tcpHandle(conn *net.TCPConn) {
 func tcpRecv() {
 
 	localAddress, err := net.ResolveTCPAddr("tcp4", fmt.Sprintf(":%d", tcpPortCfg.TcpRecvPort))
-	errtool.Errpanic(err)
+	errt.Errpanic(err)
 	tcpListener, err := net.ListenTCP("tcp", localAddress)
-	errtool.Errpanic(err)
+	errt.Errpanic(err)
 	log.Info("tcp recv run in port[%d]", tcpPortCfg.TcpRecvPort)
 	defer func() {
 		tcpListener.Close()
@@ -136,7 +136,7 @@ func tcpRecv() {
 
 	for {
 		conn, err := tcpListener.AcceptTCP()
-		errtool.Errpanic(err)
+		errt.Errpanic(err)
 
 		data := make([]byte, MaxifsLen)
 		recv_len, err := conn.Read(data)
@@ -148,7 +148,7 @@ func tcpRecv() {
 		var m struct {
 			MeshID string
 		}
-		jsontool.Decode(string(data[:recv_len]), &m)
+		jsont.Decode(string(data[:recv_len]), &m)
 
 		mc := Tcpifs{}
 		mc.MeshID = m.MeshID

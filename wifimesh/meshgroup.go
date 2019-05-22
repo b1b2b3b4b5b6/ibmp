@@ -19,7 +19,7 @@ type MeshGroup struct {
 
 var mg = &MeshGroup{meshMap: map[string]*mesh{}}
 var log = logface.New(logface.TraceLevel)
-var cfg = cfgtool.New("conf.json")
+var cfg = cfgt.New("conf.json")
 
 //New is
 func GetGroup() *MeshGroup {

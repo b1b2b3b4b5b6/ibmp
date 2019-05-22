@@ -31,7 +31,7 @@ func reportOnlineDevices(json string) {
 	for _, v := range readDevices {
 		im.Devices = append(im.Devices, device{Typ: v.GetComData().Typ, Mac: v.GetComData().Mac})
 	}
-	msg := jsontool.Encode(&im)
+	msg := jsont.Encode(&im)
 	server.New().SendRequest(msg)
 }
 
@@ -40,8 +40,8 @@ func controlDeviceInit(json string) {
 		Typ     string
 		Devices []devser.DevComdata
 	}
-	err := jsontool.Decode(json, &m)
-	errtool.Errpanic(err)
+	err := jsont.Decode(json, &m)
+	errt.Errpanic(err)
 
 	for _, v := range devser.DeviceMap {
 		v.GetStatus().Monitor = false
@@ -64,12 +64,12 @@ func parseDeviceCmd(json string) {
 		Typ     string
 		Devices []devser.DevJson
 	}
-	err := jsontool.Decode(json, &m)
-	errtool.Errpanic(err)
+	err := jsont.Decode(json, &m)
+	errt.Errpanic(err)
 	for _, v := range m.Devices {
 		dev, ok := devser.DeviceMap[v.Mac]
 		if ok {
-			cmd, _ := dev.ReplyCmd(jsontool.Encode(&v))
+			cmd, _ := dev.ReplyCmd(jsont.Encode(&v))
 			sendMap[v.Mac] = cmd
 		} else {
 			log.Error("unkonw device[%+v]", v)
@@ -102,7 +102,7 @@ func cmdHandleLoop() {
 		var m struct {
 			Typ string
 		}
-		jsontool.Decode(recv, &m)
+		jsont.Decode(recv, &m)
 		switch m.Typ {
 		case "askDevices":
 			reportOnlineDevices(recv)

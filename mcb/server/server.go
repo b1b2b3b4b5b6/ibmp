@@ -25,9 +25,9 @@ type Server interface {
 var Ser Server
 
 func init() {
-	cfg := cfgtool.New("conf.json")
+	cfg := cfgt.New("conf.json")
 	method, err := cfg.TakeString("ServerMethod")
-	errtool.Errpanic(err)
+	errt.Errpanic(err)
 
 	switch method {
 	case "MQTT":

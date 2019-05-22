@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/lumosin/goc/tl/debt"
 	"github.com/lumosin/goc/tl/errt"
-	"goc/toolcom/iotool"
+	"github.com/lumosin/goc/tl/iot"
 	"github.com/lumosin/goc/tl/jsont"
 	"io"
 	"net/http"
@@ -27,15 +27,15 @@ var typBinMap = map[string]string{}
 
 func init() {
 	json, err := cfg.TakeJson("OtaCfg")
-	errtool.Errpanic(err)
-	err = jsontool.Decode(json, &otaCfg)
-	errtool.Errpanic(err)
+	errt.Errpanic(err)
+	err = jsont.Decode(json, &otaCfg)
+	errt.Errpanic(err)
 
-	otaCfg.LocalPath = iotool.GetCurrentDirectory()
+	otaCfg.LocalPath = iot.GetCurrentDirectory()
 	go http.ListenAndServe(fmt.Sprintf(":%d", otaCfg.LocalPort), http.FileServer(http.Dir(otaCfg.LocalPath)))
 	log.Info("ota version server running[%+v]", otaCfg)
 
-	debtool.AddFunc("setBin", setBin)
+	debt.AddFunc("setBin", setBin)
 }
 
 func setBin(typ string, url string) error {

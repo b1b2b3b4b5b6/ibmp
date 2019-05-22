@@ -24,7 +24,7 @@ type DevStatus struct {
 
 func init() {
 	DeviceMap = make(map[string]Device)
-	debtool.AddFunc("print_devices", print_devices)
+	debt.AddFunc("print_devices", print_devices)
 }
 
 type Device interface {

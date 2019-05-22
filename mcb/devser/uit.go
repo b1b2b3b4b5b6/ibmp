@@ -35,8 +35,8 @@ func (p *UitDev) ReplyCmd(cmd string) (replyDev string, replySer string) {
 		Mac       string
 		WriteProp WP
 	}
-	err := jsontool.Decode(cmd, &device)
-	errtool.Errpanic(err)
+	err := jsont.Decode(cmd, &device)
+	errt.Errpanic(err)
 
 	var cusData struct {
 		Cmd   string
@@ -45,7 +45,7 @@ func (p *UitDev) ReplyCmd(cmd string) (replyDev string, replySer string) {
 	cusData.Cmd = "ImgAd"
 	cusData.ImgAd = device.WriteProp.ImgAd
 
-	return jsontool.Encode(cusData), ""
+	return jsont.Encode(cusData), ""
 }
 
 func (p *UitDev) ReplyFeed(feed interface{}) (replyDev string, replySer string) {
@@ -64,7 +64,7 @@ func (p *UitDev) ReplyFeed(feed interface{}) (replyDev string, replySer string) 
 			Version     string
 			ImgProgress int
 		}
-		jsontool.Decode(str, &m)
+		jsont.Decode(str, &m)
 		p.Status.Init = true
 		p.SW_1 = m.SW_1
 		p.SW_2 = m.SW_2
@@ -113,6 +113,6 @@ func (p *UitDev) GetJson() string {
 	}
 	m.Device.ReadProp.ImgProgress = p.ImgProgress
 
-	str := jsontool.Encode(&m)
+	str := jsont.Encode(&m)
 	return str
 }

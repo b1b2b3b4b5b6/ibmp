@@ -6,7 +6,7 @@ import (
 )
 
 var log = logface.New(logface.DebugLevel)
-var cfg = cfgtool.New("conf.json")
+var cfg = cfgt.New("conf.json")
 
 func init() {
 
