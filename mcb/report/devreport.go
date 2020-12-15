@@ -1,8 +1,8 @@
 package report
 
 import (
-	"github.com/lumosin/goc/logface"
-	"github.com/lumosin/goc/tl/cfgt"
+	"github.com/b1b2b3b4b5b6/goc/logface"
+	"github.com/b1b2b3b4b5b6/goc/tl/cfgt"
 	"ibmp/mcb/devser"
 	"ibmp/mcb/server"
 	"time"

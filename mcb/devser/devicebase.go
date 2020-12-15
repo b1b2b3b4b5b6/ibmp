@@ -1,8 +1,8 @@
 package devser
 
 import (
-	"github.com/lumosin/goc/logface"
-	"github.com/lumosin/goc/tl/debt"
+	"github.com/b1b2b3b4b5b6/goc/logface"
+	"github.com/b1b2b3b4b5b6/goc/tl/debt"
 )
 
 var DeviceMap map[string]Device

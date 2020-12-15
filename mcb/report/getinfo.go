@@ -1,7 +1,7 @@
 package report
 
 import (
-	"github.com/lumosin/goc/tl/jsont"
+	"github.com/b1b2b3b4b5b6/goc/tl/jsont"
 	"ibmp/mcb/devser"
 	"ibmp/wifimesh"
 	"time"

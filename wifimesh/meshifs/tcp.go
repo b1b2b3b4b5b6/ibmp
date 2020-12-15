@@ -4,9 +4,9 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
-	"github.com/lumosin/goc/tl/turnt"
-	"github.com/lumosin/goc/tl/errt"
-	"github.com/lumosin/goc/tl/jsont"
+	"github.com/b1b2b3b4b5b6/goc/tl/turnt"
+	"github.com/b1b2b3b4b5b6/goc/tl/errt"
+	"github.com/b1b2b3b4b5b6/goc/tl/jsont"
 	"net"
 	"time"
 )
